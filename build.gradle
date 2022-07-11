@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+}
+
+group 'cn.pursuedream'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding("UTF-8")
+compileTestJava.options.encoding("UTF-8")
+
+repositories {
+    //本地仓库，地址是maven本地仓库路径
+    mavenLocal()
+    //阿里云新库
+    maven { url "https://maven.aliyun.com/repository/central" }
+    maven { url "https://maven.aliyun.com/repository/google" }
+    maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+    maven { url "https://maven.aliyun.com/repository/jcenter" }
+    maven { url "https://maven.aliyun.com/repository/spring" }
+    maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+    maven { url "https://maven.aliyun.com/repository/public" }
+    maven { url "https://maven.aliyun.com/repository/releases" }
+    maven { url "https://maven.aliyun.com/repository/snapshots" }
+    maven { url "https://maven.aliyun.com/repository/grails-core" }
+    maven { url "https://maven.aliyun.com/repository/mapr-public" }
+    maven { url "https://maven.aliyun.com/repository/apache-snapshots" }
+    //maven的里程碑版本。有些依赖只能在这里边找到
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url 'https://repo.spring.io/libs-milestone' }
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile){
+    options.encoding("UTF-8")
+}

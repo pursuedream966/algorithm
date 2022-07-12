@@ -45,7 +45,33 @@ public class SortAlgorithmMain {
     }
 
 
+    /**
+     * 直接插入排序
+     * @param arr
+     */
+    public static void insertionSort(int[] arr){
+        for(int i = 1; i < arr.length; i++){
+            int tmp = arr[i];
+            int j = i;
+            while (j > 0 && tmp < arr[j-1]){
+                arr[j] = arr[j-1];
+                j--;
+            }
 
+            if(i != j){
+                arr[j] = tmp;
+            }
+
+        }
+    }
+
+    /**
+     * TODO 希尔排序
+     * @param arr
+     */
+    public static void shellSort(int[] arr){
+
+    }
 
     public static void main(String[] args) {
 
@@ -56,12 +82,14 @@ public class SortAlgorithmMain {
         // 排序
         // （1）冒泡泡排序
         // bubbleSort(unOrderedArray);
+
         // (2) 选择排序
-        selectionSort(unOrderedArray);
+        //selectionSort(unOrderedArray);
+
+        // (3) 直接插入排序
+        insertionSort(unOrderedArray);
 
         System.out.println(Arrays.toString(unOrderedArray));
-
-
     }
 
 }

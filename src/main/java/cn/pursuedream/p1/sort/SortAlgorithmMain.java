@@ -1,7 +1,5 @@
 package cn.pursuedream.p1.sort;
 
-import cn.pursuedream.AlgorithmCommonUtil;
-
 import java.util.Arrays;
 
 public class SortAlgorithmMain {
@@ -70,11 +68,11 @@ public class SortAlgorithmMain {
      */
     public static void shellSort(int[] arr){
 
-        for (int step = arr.length / 2; step > 0; step = step/2){
+        for (int step = arr.length / 2; step > 0; step /= 2){
             for (int i = step; i < arr.length; i++){
                 int tmp = arr[i];
                 int j = i - step;
-                while (j > 0 && tmp < arr[j]){
+                while (j >= 0 && tmp < arr[j]){
                     arr[j+step] = arr[j];
                     j -= step;
                 }
@@ -82,30 +80,128 @@ public class SortAlgorithmMain {
                 arr[j + step] = tmp;
             }
         }
-
-
     }
+
+    /**
+     * 归并排序
+     * @param arr
+     */
+    public static int[] mergeSort(int[] arr){
+
+        int length = arr.length;
+        if(length < 2){
+            return arr;
+        }
+
+        int mid = length / 2;
+        int[] left = Arrays.copyOfRange(arr, 0, mid);
+        int[] right = Arrays.copyOfRange(arr, mid, length);
+
+        return merge(mergeSort(left), mergeSort(right));
+    }
+
+    /**
+     * 归并排序-合并数组
+     * @param left
+     * @param right
+     * @return
+     */
+    public static int[] merge(int[] left, int[] right){
+        int size = left.length + right.length;
+        int[] result = new int[size];
+
+        int i = 0;
+        int j = 0;
+        int index = 0;
+        while (i < left.length && j < right.length){
+            if(left[i] < right[j]){
+                result[index++] = left[i++];
+            }else {
+                result[index++] = right[j++];
+            }
+        }
+
+        while (i < left.length){
+            result[index++] = left[i++];
+        }
+
+        while (j < right.length){
+            result[index++] = right[j++];
+        }
+
+        return result;
+    }
+
+
+    /**
+     * 快速排序
+     * @param arr
+     * @param low
+     * @param high
+     */
+    public static void quickSort(int[] arr, int low, int high){
+        if(low >= high){
+            return;
+        }
+        int left = low;
+        int right = high;
+        int base = arr[left];
+
+        while (left < right){
+            // 从后向前找比基准小的
+            while (base < arr[right] && left < right){
+                right--;
+            }
+            if(left < right){
+                swap(arr, left++, right);
+            }
+
+            // 从前向后找比基准大的
+            while (base > arr[left] && left < right){
+                left++;
+            }
+            if(left < right){
+                swap(arr, left, right--);
+            }
+        }
+
+        quickSort(arr, low, left-1);
+        quickSort(arr, left+1, high);
+    }
+
+    public static void swap(int[] arr, int left, int right){
+        int tmp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = tmp;
+    }
+
 
     public static void main(String[] args) {
 
-        int[] unOrderedArray = AlgorithmCommonUtil.UNORDERED_ARRAY.clone();
+        int[] arr = new int[]{-1, 20, 5, 345, 190,  -30, 666, 10, 20, 30, 9, 190};
 
-        System.out.println(Arrays.toString(unOrderedArray));
+        System.out.println(Arrays.toString(arr));
 
         // 排序
         // （1）冒泡泡排序
-        // bubbleSort(unOrderedArray);
+        // bubbleSort(arr);
 
         // (2) 选择排序
-        //selectionSort(unOrderedArray);
+        //selectionSort(arr);
 
         // (3) 直接插入排序
-        insertionSort(unOrderedArray);
+        //insertionSort(arr);
 
         // (4) 希尔排序
-        shellSort(unOrderedArray);
+        // shellSort(arr);
 
-        System.out.println(Arrays.toString(unOrderedArray));
+        // (5) 归并排序
+        //arr = mergeSort(arr);
+
+        // (6) 快速排序
+        // quickSort(arr, 0, arr.length-1);
+
+        System.out.println(Arrays.toString(arr));
     }
 
 }

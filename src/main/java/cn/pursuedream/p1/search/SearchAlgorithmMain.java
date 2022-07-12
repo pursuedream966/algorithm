@@ -1,7 +1,5 @@
 package cn.pursuedream.p1.search;
 
-import cn.pursuedream.AlgorithmCommonUtil;
-
 import java.util.Arrays;
 
 public class SearchAlgorithmMain {
@@ -27,10 +25,12 @@ public class SearchAlgorithmMain {
     }
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(AlgorithmCommonUtil.ORDERED_ARRAY));
-        int index = binarySearch(AlgorithmCommonUtil.ORDERED_ARRAY, 0);
+
+        int[] arr = new int[]{-10, -3, 0, 0, 1, 2, 8, 9, 50, 160, 567, 999, 1020};
+        System.out.println(Arrays.toString(arr));
+        int index = binarySearch(arr, 0);
         if(index >= 0){
-            System.out.printf("搜索成功, index【%d】, 值【%d】", index, AlgorithmCommonUtil.ORDERED_ARRAY[index]);
+            System.out.printf("搜索成功, index【%d】, 值【%d】", index, arr[index]);
         }else {
             System.out.println("搜索失败");
         }
